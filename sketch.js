@@ -4,15 +4,16 @@
 function setup() {
   createCanvas(800, 800)
   background(220);
-  goalpostsR = new Goal(5, 5, "blue", 0); // (5,5) is LEAST (x,y) possible
-  goalpostsL= new Goal (740,300, "red", 180);
+  goalpostsR = new Goal(5, 5, "blue", ); // (5,5) is LEAST (x,y) possible
+  goalpostsL= new Goal (740,300, "red", );
+  ball1= new Ball (100, 100, "purple");
 }
 
 function draw(){
 angleMode(DEGREES);
 goalpostsR.drawGoalPosts(); // draw goal on the right
 goalpostsL.drawGoalPosts(); // draw goal on the left
-ball(); // edit later
+ball1.drawBall();
 }
 class Goal {  // create goals
 
@@ -20,7 +21,7 @@ class Goal {  // create goals
 		    this.x = x;
     		this.y = y;
         this.color = color;
-        this.rotation = rotation;
+        //this.rotation = rotation;
 	}
 
 	drawGoalPosts(){ // instructions to draw goal
@@ -36,12 +37,31 @@ class Goal {  // create goals
         vertex(this.x+50, this.y + 100);
         vertex(this.x+50, this.y + 100);
         endShape();
-        rotate(this.rotation); // needs to be fixed!!
+      //  rotate(this.rotation); // needs to be fixed!!
 
 	}
 
 	}
-function ball (){
- fill("pink");
- ellipse(100,100,30,30);
+  class Ball{
+
+    constructor(x,y, color){
+  		    this.x = x;
+      		this.y = y;
+          this.color = color;
+
+  	}
+drawBall(){
+strokeWeight(1);
+stroke(0);
+  fill(this.color);
+  ellipse(this.x, this.y, 50, 50);
+fill(0);
+  ellipse(this.x- 10, this.y, 5, 5);
+  ellipse(this.x + 10, this.y, 5, 5);
+noFill();
+strokeWeight(5);
+  ellipse(this.x, this.y + 15, 10, 5);
 }
+
+
+  }
