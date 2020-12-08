@@ -8,8 +8,8 @@ function setup() {
   createCanvas(800, 800)
   background(220);
   goalpostsR = new Goal(goalX, goalY, "blue",0 ); // (5,5) is LEAST (x,y) possible
-  goalpostsL= new Goal (goalX + 785, goalY + 295, "red",180 );
-  ball1= new Ball (100, 100, "purple");
+  goalpostsL= new Goal (goalX + 785, goalY + 300, "red",180 );
+  ball1= new Ball (100, 100, 3, "white");
 }
 
 function draw(){
@@ -19,7 +19,7 @@ function draw(){
   goalpostsR.checkGoal();
   goalpostsL.checkGoal();
   ball1.drawBall();
-
+  ball1.moveBall();
 }
 class Goal {  // create goals
 
@@ -49,24 +49,28 @@ class Goal {  // create goals
   }
 
  checkGoal(){
-    if(this.x >= 50 && this.x <= 10 && this.y >= 45 && this.y <= 10){
+    if(ball1.x <= 50 && ball1.x >= 10 && ball1.y <= 100 && ball1.y >= 10){
       isInGoal = true;
       console.log ("in goal");
     }
+      else{
+console.log("not in goal");
+};
+
 }}
 
 class Ball{
 
-  constructor(x,y, color){
+  constructor(x,y, speed, color){
     this.x = x;
     this.y = y;
+    this.speed = speed;
     this.color = color;
-
   }
   drawBall(){
     strokeWeight(1);
     stroke(0);
-    fill(this.color);
+    fill(this.color); // needs to be debugged
     ellipse(this.x, this.y, 50, 50);
     fill(0);
     ellipse(this.x- 10, this.y, 5, 5);
@@ -77,8 +81,24 @@ class Ball{
   }
 
   moveBall(){
+    if (keyIsDown(UP_ARROW)) { //if you hold the up arrow, move up by speed
+       this.y -= this.speed;
+    }
+
+    if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
+        this.y += this.speed;
+    }
+    if (keyIsDown(LEFT_ARROW)) { //if you hold the up arrow, move up by speed
+       this.x -= this.speed;
+    }
+
+    if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
+        this.x += this.speed;
+    }
+
+
     if(isInGoal){
-      fill(random(0,255),random(0,255),random(0,255))
+    this.color = fill(random(0,255))
       // points + 1
       // changeControls
       // bounce
