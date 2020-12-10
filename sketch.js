@@ -1,6 +1,6 @@
 
-let isInGoal = false;
 
+let isInGoal = false;
 let goalX = 5
 let goalY = 5
 
@@ -33,7 +33,7 @@ class Goal {  // create goals
   drawGoalPosts(){ // instructions to draw goal
     push();
     translate(this.x,this.y);
-    rotate(this.rotation); // needs to be fixed!!
+    rotate(this.rotation);
     stroke(this.color);
     fill(220); // change to background color when background is finalized
     strokeWeight(5);
@@ -80,6 +80,13 @@ class Ball{
     ellipse(this.x, this.y + 15, 10, 5);
   }
 
+  bounceBall(){
+      if (ball1.x <= 50 && ball1.x >= 10 && ball1.y <= 100 && ball1.y >= 10){
+          this.speed = -this.speed;
+          console.log("bounce")
+        }
+      }
+
   moveBall(){
     if (keyIsDown(UP_ARROW)) { //if you hold the up arrow, move up by speed
        this.y -= this.speed;
@@ -95,17 +102,16 @@ class Ball{
     if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
         this.x += this.speed;
     }
-
+}
 
     if(isInGoal){
-    this.color = fill(random(0,255))
+    ball1.color = fill("green");
       // points + 1
       // changeControls
-      // bounce
+      ball1.bounceBall();
     goalY = goalY + random(5,790);
     goalX = goalX + random(5,790);
     isInGoal = false;
     }
-  }
 
-  }
+}
