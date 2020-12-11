@@ -5,7 +5,7 @@ let goalX = 5
 let goalY = 5
 
 function setup() {
-  createCanvas(800, 800)
+  createCanvas(800, 400)
   goalpostsR = new Goal(goalX, goalY, color(76,246,246,96),0 ); // (5,5) is LEAST (x,y) possible
   goalpostsL= new Goal (goalX + 785, goalY + 300, color(104, 246, 76, 93),180 );
   ball1= new Ball (100, 100, 3, color(85, 235, 150, 92));
@@ -51,11 +51,16 @@ class Goal {  // create goals
  checkGoal(){
     if(ball1.x <= 50 && ball1.x >= 10 && ball1.y <= 100 && ball1.y >= 10){
       isInGoal = true;
-      console.log ("in goal");
+      console.log("in goal");
     }
-      else{
-console.log("not in goal");
-};
+   else if (ball1.x <= 780 && ball1.x >= 750 && ball1.y <= 300 && ball1.y >= 210) {
+     isInGoal = true;
+     console.log("in goal");
+   }
+
+//       else{
+// //console.log("not in goal");
+// };
 
 }}
 
@@ -81,9 +86,10 @@ class Ball{
   }
 
   bounceBall(){
-      if (ball1.x <= 50 && ball1.x >= 10 && ball1.y <= 100 && ball1.y >= 10){
-          this.speed = -this.speed;
-          console.log("bounce")
+      if (isInGoal = true){
+        this.x = 400
+        this.y = 200
+        console.log("bounce")
         }
       }
 
@@ -113,6 +119,16 @@ moveWithSpace(){
   if(keyIsDown(SHIFT)){
     this.x += this.speed;
   }
+  if(keyIsDown(BACKSPACE)){
+    this.x -= this.speed;
+  }
+}
+
+moveWithMouse(){
+if(mouseIsPressed){
+  this.x = mouseX;
+  this.y = mouseY;
+}
 }
 
   moveBall(){
@@ -122,17 +138,20 @@ moveWithSpace(){
   else if (moveMechanism == 1) {
     this.moveWithSpace();
   }
-
+else if (moveMechanism == 2){
+  this.moveWithMouse();
+}
 
   if(isInGoal){
   ball1.color = color(random(0,255));
     // points + 1
     // changeControls
-  //this.bounceBall();
+  this.bounceBall();
   goalY = goalY + random(5,790);
   goalX = goalX + random(5,790);
   isInGoal = false;
-  moveMechanism = moveMechanism + 1
+  moveMechanism = random(0,3);
+  console.log(moveMechanism)
   }
 
 
