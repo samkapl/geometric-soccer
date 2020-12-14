@@ -124,11 +124,19 @@ moveWithSpace(){
   }
 }
 
-moveWithMouse(){
-if(mouseIsPressed){
-  this.x = mouseX;
-  this.y = mouseY;
-}
+moveWithUDLF(){
+  if(keyIsDown(85)){ // space bar
+  this.y += this.speed;
+  }
+  if(keyIsDown(68)){
+    this.y -= this.speed;
+  }
+  if(keyIsDown(82)){
+    this.x += this.speed;
+  }
+  if(keyIsDown(76)){
+    this.x -= this.speed;
+  }
 }
 
   moveBall(){
@@ -139,18 +147,18 @@ if(mouseIsPressed){
     this.moveWithSpace();
   }
 else if (moveMechanism == 2){
-  this.moveWithMouse();
+  this.moveWithUDLF();
 }
 
   if(isInGoal){
-  ball1.color = color(random(0,255));
+  ball1.color = color(random(0,255),random(0,255), random(0,255) );
     // points + 1
     // changeControls
   this.bounceBall();
   goalY = goalY + random(5,790);
   goalX = goalX + random(5,790);
   isInGoal = false;
-  moveMechanism = random(0,3);
+  moveMechanism = random(0,2);
   console.log(moveMechanism)
   }
 
