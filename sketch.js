@@ -1,14 +1,41 @@
 
-let moveMechanism = 0
+let score = 0
+let counter = 0;
+let timeleft = 30;
+let moveMechanism = 0;
 let isInGoal = false;
 let goalX = 5
 let goalY = 5
+
+
+function convertSeconds(s) {
+  var min = floor (s / 60);
+  var sec = s % 60;
+  return nf(min,2) + ':' + nf(sec,2);
+}
 
 function setup() {
   createCanvas(800, 400)
   goalpostsR = new Goal(goalX, goalY, color(76,246,246,96),0 ); // (5,5) is LEAST (x,y) possible
   goalpostsL= new Goal (goalX + 785, goalY + 300, color(104, 246, 76, 93),180 );
   ball1= new Ball (100, 100, 3, color(85, 235, 150, 92));
+  var params = getURLParams();
+console.log(params);
+if (params.minute) {
+  var min = params.minute;
+  timeleft = min * 60;
+}
+  var timer = select('#timer');
+  timer.html(convertSeconds(timeleft - counter));
+
+  function timeIt() {
+    counter++;
+    timer.html(convertSeconds(timeleft - counter));
+    if (counter == timeleft){
+      counter = 0;
+    }
+  }
+  setInterval(timeIt, 1000);
 }
 
 function draw(){
@@ -20,6 +47,15 @@ function draw(){
   goalpostsL.checkGoal();
   ball1.drawBall();
   ball1.moveBall();
+  noStroke();
+ fill('black');
+ textSize(12)
+ text("points: " + score,700,20)
+ text("hint: explore the keyboard!",20,370 )
+ if(moveMechanism == 5){
+   textSize(20);
+  text("Congratulations! you've completed Geometric Soccer! Refresh the page to play again!", 10 ,170)
+ }
 }
 class Goal {  // create goals
 
@@ -57,10 +93,6 @@ class Goal {  // create goals
      isInGoal = true;
      console.log("in goal");
    }
-
-//       else{
-// //console.log("not in goal");
-// };
 
 }}
 
@@ -126,15 +158,45 @@ moveWithSpace(){
 
 moveWithUDLF(){
   if(keyIsDown(85)){
-  this.y -= this.speed;
+  this.y -= this.speed; // d
   }
   if(keyIsDown(68)){
-    this.y += this.speed;
+    this.y += this.speed; // u
   }
   if(keyIsDown(82)){
+    this.x += this.speed; // r
+  }
+  if(keyIsDown(76)){ // l
+    this.x -= this.speed;
+  }
+}
+
+moveWithCarats(){
+  if(keyIsDown(54)){  // up carat
+  this.y -= this.speed;
+  }
+  if(keyIsDown(88)){ // X
+    this.y += this.speed;
+  }
+  if(keyIsDown(190)){ // right carat
     this.x += this.speed;
   }
-  if(keyIsDown(76)){
+  if(keyIsDown(188)){ // left carat
+    this.x -= this.speed;
+  }
+}
+
+moveWithPlusMinus(){
+  if(keyIsDown(220)){  // backslash
+  this.y -= this.speed;
+  }
+  if(keyIsDown(191)){ // forward slash
+    this.y += this.speed;
+  }
+  if(keyIsDown(187)){ // +
+    this.x += this.speed;
+  }
+  if(keyIsDown(189)){ // -
     this.x -= this.speed;
   }
 }
@@ -149,23 +211,25 @@ moveWithUDLF(){
 else if (moveMechanism == 2){
   this.moveWithUDLF();
 }
+else if (moveMechanism == 3){
+  this.moveWithCarats();
+}
+else if (moveMechanism == 4){
+  this.moveWithPlusMinus();
+}
 
   if(isInGoal){
   ball1.color = color(random(0,255),random(0,255), random(0,255) );
-    // points + 1
+  score = score + 1
+  console.log("point" + score)
   this.bounceBall();
   goalY = goalY + random(5,790);
   goalX = goalX + random(5,790);
   isInGoal = false;
-  if (moveMechanism < 2){
-  moveMechanism = moveMechanism +1;}
-  else if (moveMechanism = 2) {
-    moveMechanism == 0
-  }
-  console.log(moveMechanism)
+  moveMechanism = moveMechanism + 1
+ console.log(moveMechanism)
   }
 
-
-}
+  }
 
 }
