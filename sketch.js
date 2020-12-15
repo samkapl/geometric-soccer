@@ -175,7 +175,7 @@ moveWithCarats(){
   if(keyIsDown(54)){  // up carat
   this.y -= this.speed;
   }
-  if(keyIsDown(88)){ // X
+  if(keyIsDown(86)){ // V
     this.y += this.speed;
   }
   if(keyIsDown(190)){ // right carat
@@ -186,17 +186,17 @@ moveWithCarats(){
   }
 }
 
-moveWithPlusMinus(){
-  if(keyIsDown(220)){  // backslash
+moveWithCompass(){
+  if(keyIsDown(83)){  // S
   this.y -= this.speed;
   }
-  if(keyIsDown(191)){ // forward slash
+  if(keyIsDown(78)){ // N
     this.y += this.speed;
   }
-  if(keyIsDown(187)){ // +
+  if(keyIsDown(69)){ // E
     this.x += this.speed;
   }
-  if(keyIsDown(189)){ // -
+  if(keyIsDown(87)){ // W
     this.x -= this.speed;
   }
 }
