@@ -14,6 +14,7 @@ function convertSeconds(s) {
   return nf(min,2) + ':' + nf(sec,2);
 }
 
+
 function setup() {
   createCanvas(800, 400)
   goalpostsR = new Goal(goalX, goalY, color(76,246,246,96),0 ); // (5,5) is LEAST (x,y) possible
@@ -49,8 +50,9 @@ function draw(){
   ball1.drawBall();
   ball1.moveBall();
   noStroke();
- fill('black');
- textSize(12)
+ fill('gray');
+ textSize(15)
+ textFont('courier new')
  text("points: " + score,700,20)
  text("hint: explore the keyboard!",20,370 )
  if(moveMechanism == 5){
