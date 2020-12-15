@@ -1,7 +1,7 @@
 
 let score = 0
 let counter = 0;
-let timeleft = 30;
+let timeleft = 60;
 let moveMechanism = 0;
 let isInGoal = false;
 let goalX = 5
@@ -32,7 +32,8 @@ if (params.minute) {
     counter++;
     timer.html(convertSeconds(timeleft - counter));
     if (counter == timeleft){
-      counter = 0;
+      clearInterval(interval);
+      //counter = 0;
     }
   }
   setInterval(timeIt, 1000);
