@@ -7,6 +7,8 @@ let isInGoal = false;
 let goalX = 5
 let goalY = 5
 let interval
+let loss = 0
+let endgame = 0;
 
 function convertSeconds(s) {
   var min = floor (s / 60);
@@ -14,6 +16,12 @@ function convertSeconds(s) {
   return nf(min,2) + ':' + nf(sec,2);
 }
 
+function checkLoss(){
+  if (endgame == 1){
+    loss = 1
+    console.log("loss")
+  }
+}
 
 function setup() {
   createCanvas(800, 400)
@@ -35,6 +43,8 @@ if (params.minute) {
     if (counter == timeleft){
       print("okay")
       clearInterval(interval);
+      endgame = 1
+      console.log("endgame = 1");
     }
   }
   interval=setInterval(timeIt, 1000);
@@ -58,7 +68,12 @@ function draw(){
  if(moveMechanism == 5){
    textSize(20);
   text("Congratulations! you've completed Geometric Soccer! Refresh the page to play again!", 10 ,170)
- }
+  console.log("win") }
+  checkLoss();
+  if (loss == 1){
+    textSize(20);
+   text("Time's Up! How did you do? Refresh the page to play again!", 10 ,170)
+  }
 }
 class Goal {  // create goals
 
