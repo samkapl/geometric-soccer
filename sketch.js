@@ -1,12 +1,12 @@
 
 let score = 0
 let counter = 0;
-let timeleft = 60;
+let timeleft = 120;
 let moveMechanism = 0;
 let isInGoal = false;
 let goalX = 5
 let goalY = 5
-
+let interval
 
 function convertSeconds(s) {
   var min = floor (s / 60);
@@ -32,11 +32,11 @@ if (params.minute) {
     counter++;
     timer.html(convertSeconds(timeleft - counter));
     if (counter == timeleft){
+      print("okay")
       clearInterval(interval);
-      //counter = 0;
     }
   }
-  setInterval(timeIt, 1000);
+  interval=setInterval(timeIt, 1000);
 }
 
 function draw(){
