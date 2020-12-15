@@ -187,10 +187,10 @@ moveWithCarats(){
 }
 
 moveWithCompass(){
-  if(keyIsDown(83)){  // S
+  if(keyIsDown(78)){  // N
   this.y -= this.speed;
   }
-  if(keyIsDown(78)){ // N
+  if(keyIsDown(83)){ // S
     this.y += this.speed;
   }
   if(keyIsDown(69)){ // E
@@ -215,7 +215,7 @@ else if (moveMechanism == 3){
   this.moveWithCarats();
 }
 else if (moveMechanism == 4){
-  this.moveWithPlusMinus();
+  this.moveWithCompass();
 }
 
   if(isInGoal){
@@ -223,8 +223,6 @@ else if (moveMechanism == 4){
   score = score + 1
   console.log("point" + score)
   this.bounceBall();
-  goalY = goalY + random(5,790);
-  goalX = goalX + random(5,790);
   isInGoal = false;
   moveMechanism = moveMechanism + 1
  console.log(moveMechanism)
