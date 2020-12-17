@@ -19,7 +19,7 @@ function convertSeconds(s) {
 function checkLoss(){
   if (endgame == 1){
     loss = 1
-    console.log("loss")
+    print("loss")
   }
 }
 
